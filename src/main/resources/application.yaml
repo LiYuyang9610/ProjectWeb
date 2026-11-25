@@ -1,3 +1,15 @@
+server:
+  port: 8181
+
 spring:
   application:
     name: ProjectWeb
+
+  datasource:
+    url: jdbc:postgresql://postgres:5432/main_db
+    username: ${DB_USER:app_admin}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  mongodb:
+    uri: mongodb://${DB_USER:app_admin}:${DB_PASSWORD}@mongodb:27017/main_db?authSource=admin
