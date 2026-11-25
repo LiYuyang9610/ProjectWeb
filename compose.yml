@@ -1,0 +1,49 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: app-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: app_admin
+      POSTGRES_PASSWORD: BeMyself840
+      POSTGRES_DB: main_db
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - ../projectWebData/postgres:/var/lib/postgresql/data:Z
+    networks:
+      - app-net
+
+  mongodb:
+    image: mongo:7
+    container_name: app-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: app_admin
+      MONGO_INITDB_ROOT_PASSWORD: BeMyself840
+    ports:
+      - "127.0.0.1:27017:27017"
+    volumes:
+      - ../projectWebData/mongodb:/data/db:Z
+    networks:
+      - app-net
+
+  backend:
+    build: ./backend
+    dockerfile: Dockerfile
+    container_name: app-backend
+    restart: unless-stopped
+    environment:
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "8181:8181"
+    networks:
+      - app-net
+    depends_on:
+      - postgres
+      - mongodb
+
+networks:
+  app-net:
+    driver: bridge
