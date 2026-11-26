@@ -2,6 +2,7 @@ package org.lyy.projectweb.hello
 
 import org.springframework.data.mongodb.core.MongoTemplate
 import org.springframework.jdbc.core.JdbcTemplate
+import org.springframework.jdbc.core.queryForObject
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 import java.time.ZonedDateTime
@@ -20,7 +21,7 @@ class HelloController(private val jdbcTemplate: JdbcTemplate,
 
         val (pgStatus, pgMs) = timed {
             try {
-                val res = jdbcTemplate.queryForObject("SELECT 1", Int::class.java)
+                val res = jdbcTemplate.queryForObject<Int>("SELECT 1")
                 if (res == 1) "✅ 连接成功" else "❌ 异常"
             } catch (e: Exception) {
                 "❌ 连接失败: ${e.message}"
