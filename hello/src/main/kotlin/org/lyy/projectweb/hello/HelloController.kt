@@ -14,7 +14,7 @@ class HelloController(private val jdbcTemplate: JdbcTemplate,
 
     private val timeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS z")
 
-    @GetMapping("/hello")
+    @GetMapping("/database")
     fun hello(): String {
         val requestTime = ZonedDateTime.now()
         val startNanos = System.nanoTime()
