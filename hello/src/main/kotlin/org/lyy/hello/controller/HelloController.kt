@@ -1,4 +1,4 @@
-package org.lyy.projectweb.hello
+package org.lyy.hello.controller
 
 import org.springframework.data.mongodb.core.MongoTemplate
 import org.springframework.jdbc.core.JdbcTemplate

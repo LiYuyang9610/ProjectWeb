@@ -1,4 +1,4 @@
-package org.lyy.projectweb
+package org.lyy.hello
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
